@@ -1,8 +1,9 @@
 class CreateConfessionQueues < ActiveRecord::Migration[6.1]
   def change
     create_table :confession_queues do |t|
-      t.datetime :startTime
-      t.datetime :endTime
+      t.date :date
+      t.time :startTime
+      t.time :endTime
       t.text :notes
       t.string :place
 
