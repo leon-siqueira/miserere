@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2022_04_12_211318) do
 
   create_table "confession_queues", force: :cascade do |t|
     t.date "date"
-    t.time "startTime"
-    t.time "endTime"
+    t.datetime "startTime"
+    t.datetime "endTime"
     t.text "notes"
     t.string "place"
     t.datetime "created_at", precision: 6, null: false
