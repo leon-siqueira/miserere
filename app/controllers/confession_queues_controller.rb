@@ -21,6 +21,6 @@ class ConfessionQueuesController < ApplicationController
   private
 
   def confession_queue_params
-    params.require(:confession_queue).permit(:date, :start_time, :end_time, :place, :notes)
+    params.require(:confession_queue).permit(:date, :startTime, :endTime, :place, :notes)
   end
 end

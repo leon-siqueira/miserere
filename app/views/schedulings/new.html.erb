@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 m-3">
+      <%= form_with(model: [@confession_queue, @scheduling]) do |form| %>
+        <%# <%= form.hidden_field :confession_queue_id, value: @confession_queue.id %>
+        <%= form.time_select :hour, minute_step: 15%>
+        <%= form.submit "Cadastrar", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
