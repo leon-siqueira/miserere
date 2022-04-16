@@ -11,7 +11,14 @@
           <li><%= confession_queue.place %> |
               <%= confession_queue.date %> |
               Fila: <%= confession_queue.schedulings.count %> |
-              <%= link_to "Agendar", new_scheduling_path(confession_queue_id: confession_queue.id) %></li>
+              <%= link_to "Agendar", new_confession_queue_scheduling_path(confession_queue_id: confession_queue.id) %></li>
+              <% unless confession_queue.schedulings.empty? %>
+                <ul>
+                  <% confession_queue.schedulings.each do |scheduling| %>
+                    <li><%=scheduling.hour.strftime("%R")%></li>
+                  <% end %>
+                </ul>
+              <% end %>
         <% end %>
       </ul>
     </div>
