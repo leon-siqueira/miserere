@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 m-3">
+      <%= form_with model: @confession_queue do |form| %>
+        <div class="row">
+          <div class="col-12 mb-3">
+            <div class="col mb-2">
+              <%= form.label :date, "Data" %>
+            </div>
+            <div class="col">
+              <%= form.date_select :date, start_year:Date.today.year %>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-3">
+            <div class="col mb-2">
+              <%= form.label :start_time, "Início" %>
+            </div>
+            <div class="col">
+              <%= form.time_select :start_time, minute_step: 15 %>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-3">
+            <div class="col mb-2">
+              <%= form.label :end_time, "Término" %>
+            </div>
+            <div class="col">
+              <%= form.time_select :end_time, minute_step: 15 %>
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            <div class="col mb-2">
+              <%= form.label :place, "Local" %>
+            </div>
+            <%= form.text_field :place, class:"form-control w-100" %>
+          </div>
+          <div class="col-12 mb-3">
+            <div class="col mb-2">
+              <%= form.label :notes, "Avisos" %>
+            </div>
+            <%= form.text_area :notes, class:"form-control w-100" %>
+          </div>
+          <div class="col-6">
+            <%= form.submit "Editar", class:"btn btn-primary" %>
+          </div>
+          <div class="col-6 d-flex justify-content-end align-items-center">
+            <%= link_to confession_queue_path(@confession_queue), method: :delete, data: { confirm: "Are you sure?" } do%>
+              <i class="fas fa-trash-alt text-danger fs-3"></i>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
