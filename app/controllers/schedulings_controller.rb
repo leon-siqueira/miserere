@@ -15,6 +15,8 @@ class SchedulingsController < ApplicationController
     end
   end
 
+
+
   def scheduling_params
     params.require(:scheduling).permit(:hour, :confession_queue_id)
   end
