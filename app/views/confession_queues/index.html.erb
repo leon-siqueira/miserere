@@ -19,8 +19,11 @@
           </li>
             <% unless confession_queue.schedulings.empty? %>
               <ul>
-                <% confession_queue.schedulings.each do |scheduling| %>
+                <% confession_queue.schedulings.sort_by{ |sch| sch.hour }.each do |scheduling| %>
                   <li>
+                    <%= link_to edit_scheduling_path(scheduling.id) do%>
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    <% end %> |
                     <%=scheduling.hour.strftime("%R")%>
                   </li>
                 <% end %>

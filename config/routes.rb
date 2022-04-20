@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :schedulings, only: %i[index new create]
   end
 
-  #resources :schedulings, only: %i[new create]
+  resources :schedulings, only: %i[edit update destroy]
 
-  root to: "confession_queues#index"
+  root to: 'confession_queues#index'
 end

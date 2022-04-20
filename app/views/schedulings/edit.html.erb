@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 m-3">
+      <%= form_with(model: [@scheduling]) do |form| %>
+        <%= form.time_select :hour, minute_step: 15,
+                                    ignore_date: true,
+                                    start_hour: @scheduling.confession_queue.start_time.hour,
+                                    end_hour: @scheduling.confession_queue.end_time.hour%>
+        <%= form.submit "Editar", class:"btn btn-primary" %>
+      <% end %>
+      <%= link_to scheduling_path(@scheduling), method: :delete, data: { confirm: "Are you sure?" } do%>
+        <i class="fas fa-trash-alt text-danger fs-3"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
