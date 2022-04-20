@@ -19,7 +19,7 @@
           </li>
             <% unless confession_queue.schedulings.empty? %>
               <ul>
-                <% confession_queue.schedulings.each do |scheduling| %>
+                <% confession_queue.schedulings.sort_by{ |sch| sch.hour }.each do |scheduling| %>
                   <li>
                     <%= link_to edit_confession_queue_scheduling_path(confession_queue.id, scheduling.id) do%>
                       <i class="fa-solid fa-pen-to-square"></i>
