@@ -14,9 +14,14 @@ class ConfessionQueuesController < ApplicationController
 
   def create
     @confession_queue = ConfessionQueue.new(confession_queue_params)
-    @confession_queue.save
+    set_times
 
-    redirect_to confession_queues_path
+    raise
+    if @confession_queue.save
+      redirect_to confession_queues_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -35,6 +40,21 @@ class ConfessionQueuesController < ApplicationController
   end
 
   private
+
+  def set_times
+    @confession_queue.start_time = DateTime.new(confession_queue_params['date(1i)'].to_i,
+                                                confession_queue_params['date(2i)'].to_i,
+                                                confession_queue_params['date(3i)'].to_i,
+                                                confession_queue_params['start_time(4i)'].to_i,
+                                                confession_queue_params['start_time(5i)'].to_i,
+                                                0, -3)
+    @confession_queue.end_time = DateTime.new(confession_queue_params['date(1i)'].to_i,
+                                              confession_queue_params['date(2i)'].to_i,
+                                              confession_queue_params['date(3i)'].to_i,
+                                              confession_queue_params['end_time(4i)'].to_i,
+                                              confession_queue_params['end_time(5i)'].to_i,
+                                              0, -3)
+  end
 
   def set_confession_queue
     @confession_queue = ConfessionQueue.find(params[:id])
