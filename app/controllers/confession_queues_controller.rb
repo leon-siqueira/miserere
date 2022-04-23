@@ -14,7 +14,7 @@ class ConfessionQueuesController < ApplicationController
 
   def create
     @confession_queue = ConfessionQueue.new(confession_queue_params)
-    set_times
+    sych_times
 
     raise
     if @confession_queue.save
@@ -41,19 +41,25 @@ class ConfessionQueuesController < ApplicationController
 
   private
 
-  def set_times
-    @confession_queue.start_time = DateTime.new(confession_queue_params['date(1i)'].to_i,
-                                                confession_queue_params['date(2i)'].to_i,
-                                                confession_queue_params['date(3i)'].to_i,
-                                                confession_queue_params['start_time(4i)'].to_i,
-                                                confession_queue_params['start_time(5i)'].to_i,
-                                                0, -3)
-    @confession_queue.end_time = DateTime.new(confession_queue_params['date(1i)'].to_i,
-                                              confession_queue_params['date(2i)'].to_i,
-                                              confession_queue_params['date(3i)'].to_i,
-                                              confession_queue_params['end_time(4i)'].to_i,
-                                              confession_queue_params['end_time(5i)'].to_i,
-                                              0, -3)
+  def sych_times
+    @confession_queue.start_time = @confession_queue.start_time.change(year: confession_queue_params['date(1i)'].to_i,
+                                                                       month: confession_queue_params['date(2i)'].to_i,
+                                                                       day: confession_queue_params['date(3i)'].to_i)
+    @confession_queue.end_time = @confession_queue.end_time.change(year: confession_queue_params['date(1i)'].to_i,
+                                                                   month: confession_queue_params['date(2i)'].to_i,
+                                                                   day: confession_queue_params['date(3i)'].to_i)
+    # @confession_queue.start_time = DateTime.new(confession_queue_params['date(1i)'].to_i,
+    #                                             confession_queue_params['date(2i)'].to_i,
+    #                                             confession_queue_params['date(3i)'].to_i,
+    #                                             confession_queue_params['start_time(4i)'].to_i,
+    #                                             confession_queue_params['start_time(5i)'].to_i,
+    #                                             0)
+    # @confession_queue.end_time = DateTime.new(confession_queue_params['date(1i)'].to_i,
+    #                                           confession_queue_params['date(2i)'].to_i,
+    #                                           confession_queue_params['date(3i)'].to_i,
+    #                                           confession_queue_params['end_time(4i)'].to_i,
+    #                                           confession_queue_params['end_time(5i)'].to_i,
+    #                                           0)
   end
 
   def set_confession_queue
