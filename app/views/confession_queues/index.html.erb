@@ -1,8 +1,16 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 p-3 text-end">
-      <%= link_to new_confession_queue_path do%>
-        <span class="btn btn-primary">Nova Fila</a>
+      <% if user_signed_in? %>
+        <% if current_user.is_priest %>
+          <%= link_to new_confession_queue_path do%>
+            <span class="btn btn-primary">Nova Fila</a>
+          <% end %>
+        <% end %>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Entrar', user_session_path %> |
+        <%= link_to 'Cadastrar', new_user_registration_path %>
       <% end %>
     </div>
     <div class="col-lg-8">
