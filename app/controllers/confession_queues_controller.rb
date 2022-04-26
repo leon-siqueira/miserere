@@ -1,4 +1,5 @@
 class ConfessionQueuesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_confession_queue, only: %i[show edit update destroy]
 
   def index
