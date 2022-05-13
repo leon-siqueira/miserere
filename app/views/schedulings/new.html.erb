@@ -2,10 +2,16 @@
   <div class="row justify-content-center">
     <div class="col-lg-8 m-3">
       <%= form_with(model: [@confession_queue, @scheduling]) do |form| %>
-        <%= form.time_select :hour, minute_step: 15,
-                                    ignore_date: true,
-                                    start_hour: @confession_queue.start_time.hour,
-                                    end_hour: @confession_queue.end_time.hour%>
+        <% @scheduling_slots.keys.each do |slot| %>
+          <% if @scheduling_slots[slot] %>
+            <%= form.radio_button :hour, "#{slot}"%>
+            <%= form.label "hour_#{slot.gsub(':','')}", "#{slot}", class:'btn btn-sm btn-outline-primary'%>
+          <% else %>
+            <%= form.radio_button :hour, "#{slot}", disabled: true%>
+            <%= form.label "hour_#{slot.gsub(':','')}", "#{slot}", class:'btn btn-sm disabled btn-outline-secondary'%>
+          <% end %>
+        <% end %>
+
         <%= form.submit "Cadastrar", class:"btn btn-primary" %>
       <% end %>
     </div>

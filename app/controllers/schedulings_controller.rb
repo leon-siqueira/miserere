@@ -4,6 +4,7 @@ class SchedulingsController < ApplicationController
 
   def new
     @scheduling = Scheduling.new
+    @scheduling_slots = scheduling_availability(@confession_queue)
   end
 
   def create
@@ -12,11 +13,13 @@ class SchedulingsController < ApplicationController
     if @scheduling.save
       redirect_to confession_queues_path
     else
+      @scheduling_slots = scheduling_availability(@confession_queue)
       render :new
     end
   end
 
   def edit
+    @scheduling_slots = scheduling_availability(@scheduling.confession_queue)
   end
 
   def update
@@ -39,6 +42,18 @@ class SchedulingsController < ApplicationController
 
   def set_confession_queue
     @confession_queue = ConfessionQueue.find(params[:confession_queue_id])
+  end
+
+  def scheduling_availability(confession_queue)
+    scheduling_availability = {}
+    minute_step = confession_queue.start_time
+    until scheduling_availability.keys.include?(confession_queue.end_time.strftime('%R'))
+      scheduling_availability[minute_step.strftime('%R')] = !confession_queue.schedulings.map(&:hour)
+                                                                             .include?(minute_step.strftime('%R'))
+      minute_step += 15.minutes
+    end
+
+    scheduling_availability
   end
 
   def scheduling_params

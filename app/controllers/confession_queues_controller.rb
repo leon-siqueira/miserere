@@ -14,9 +14,13 @@ class ConfessionQueuesController < ApplicationController
 
   def create
     @confession_queue = ConfessionQueue.new(confession_queue_params)
-    @confession_queue.save
+    sych_times
 
-    redirect_to confession_queues_path
+    if @confession_queue.save
+      redirect_to confession_queues_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -35,6 +39,15 @@ class ConfessionQueuesController < ApplicationController
   end
 
   private
+
+  def sych_times
+    @confession_queue.start_time = @confession_queue.start_time.change(year: confession_queue_params['date(1i)'].to_i,
+                                                                       month: confession_queue_params['date(2i)'].to_i,
+                                                                       day: confession_queue_params['date(3i)'].to_i)
+    @confession_queue.end_time = @confession_queue.end_time.change(year: confession_queue_params['date(1i)'].to_i,
+                                                                   month: confession_queue_params['date(2i)'].to_i,
+                                                                   day: confession_queue_params['date(3i)'].to_i)
+  end
 
   def set_confession_queue
     @confession_queue = ConfessionQueue.find(params[:id])
