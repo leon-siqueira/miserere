@@ -16,7 +16,6 @@ class ConfessionQueuesController < ApplicationController
     @confession_queue = ConfessionQueue.new(confession_queue_params)
     sych_times
 
-    raise
     if @confession_queue.save
       redirect_to confession_queues_path
     else

@@ -7,5 +7,5 @@ class ConfessionQueue < ApplicationRecord
   validates_datetime :start_time, after: DateTime.current,
                                   after_message: "A hora de ínicio deve ser depois de #{Time.current}"
   validates_datetime :end_time, after: :start_time,
-                                after_message: "A hora de témino deve ser depois da hora de início"
+                                after_message: 'A hora de témino deve ser depois da hora de início'
 end
