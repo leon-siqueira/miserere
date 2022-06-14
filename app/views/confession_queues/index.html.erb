@@ -5,6 +5,16 @@
         <span class="btn btn-primary">Nova Fila</a>
       <% end %>
     </div>
+    <div class="col-12 p-3 d-flex justify-content-center">
+      <%= form_with model: ConfessionQueue.new do |f|%>
+        <%= f.text_field :start_time,
+          data: {
+            controller: "flatpickr",
+            flatpickr_date_format: "d/m/Y",
+            flatpickr_min_date: Time.zone.now
+          } %>
+      <% end %>
+    </div>
     <div class="col-lg-8">
       <ul>
         <% @confession_queues.each do |confession_queue| %>
@@ -13,7 +23,7 @@
               <i class="fa-solid fa-pen-to-square"></i>
             <% end %> |
             <%= confession_queue.place %> |
-            <%= confession_queue.date %> |
+            <%= confession_queue.date.strftime('%d/%m/%Y') %> |
             Fila: <%= confession_queue.schedulings.count %> |
             <%= confession_queue.latitude ? Geocoder::Calculations.distance_between(@latlng, [confession_queue.latitude, confession_queue.longitude]).round(1) : "?" %> Km
             <%= link_to "Agendar", new_confession_queue_scheduling_path(confession_queue_id: confession_queue.id) %>

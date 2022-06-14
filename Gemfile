@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.7'
 # task runner
 gem 'rake'
 
+# stimulus, JS framework
+gem 'stimulus-rails'
+
 gem 'geocoder'
 
 # Use Active Storage variant
