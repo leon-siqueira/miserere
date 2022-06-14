@@ -2,6 +2,7 @@ class ConfessionQueuesController < ApplicationController
   before_action :set_confession_queue, only: %i[show edit update destroy]
 
   def index
+    @latlng = [-5.8415, -35.2104]
     @confession_queues = ConfessionQueue.all
   end
 
@@ -27,6 +28,7 @@ class ConfessionQueuesController < ApplicationController
   end
 
   def update
+    sych_times
     @confession_queue.update(confession_queue_params)
 
     redirect_to confession_queues_path
@@ -54,6 +56,6 @@ class ConfessionQueuesController < ApplicationController
   end
 
   def confession_queue_params
-    params.require(:confession_queue).permit(:date, :start_time, :end_time, :place, :notes)
+    params.require(:confession_queue).permit(:date, :start_time, :end_time, :place, :notes, :street, :city, :state, :postcode)
   end
 end

@@ -33,6 +33,30 @@
             </div>
             <%= form.text_field :place, class:"form-control w-100" %>
           </div>
+          <div class="col-9 mb-3">
+            <div class="col mb-2">
+              <%= form.label :street, "Rua" %>
+            </div>
+            <%= form.text_field :street, class:"form-control w-100" %>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="col mb-2">
+              <%= form.label :city, "Cidade" %>
+            </div>
+            <%= form.text_field :city, class:"form-control w-100" %>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="col mb-2">
+              <%= form.label :state, "Estado" %>
+            </div>
+            <%= form.text_field :state, class:"form-control w-100" %>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="col mb-2">
+              <%= form.label :postcode, "CEP" %>
+            </div>
+            <%= form.text_field :postcode, class:"form-control w-100" %>
+          </div>
           <div class="col-12 mb-3">
             <div class="col mb-2">
               <%= form.label :notes, "Avisos" %>

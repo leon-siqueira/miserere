@@ -1,4 +1,21 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: schedulings
+#
+#  id                  :bigint           not null, primary key
+#  hour                :time
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  confession_queue_id :bigint           not null
+#
+# Indexes
+#
+#  index_schedulings_on_confession_queue_id  (confession_queue_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (confession_queue_id => confession_queues.id)
+#
 
 one:
   hour: 2022-04-12 18:13:18
