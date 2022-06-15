@@ -5,7 +5,41 @@
         <span class="btn btn-primary">Nova Fila</a>
       <% end %>
     </div>
+    <div class="col-12 p-3 d-flex justify-content-center">
+      <%= search_form_for @q, class: 'w-100 my-3' do |f|%>
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-4">
+            <div class="col mb-2">
+              <%= f.label :place, 'Cidade'%>
+            </div>
+            <div class="col mb-3">
+              <%= f.search_field :city_cont, class: 'form-control col-md-6 w-100' %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="col mb-2">
+              <%= f.label :date, 'Data' %>
+            </div>
+            <div class="col mb-3">
+              <%= f.text_field :date,
+                class: 'form-control text-center col-md-6',
+                data: {
+                  controller: "flatpickr",
+                  flatpickr_date_format: "d/m/Y",
+                  flatpickr_min_date: Time.zone.now
+              } %>
+            </div>
+          </div>
+          <div class="col-lg-1 ms-2 d-flex align-items-end justify-content-center mb-3">
+            <%= f.submit "Pesquisar", class: 'btn btn-primary'%>
+          </div>
+        </div>
+      <% end %>
+    </div>
     <div class="col-lg-8">
+      <% unless params[:q].values.uniq == ['']  %>
+       <h4>Resultados para '<%= "#{params[:q].values.reject{ |p| p == ''}.join(" ")}"%>'</h4>
+      <% end %>
       <ul>
         <% @confession_queues.each do |confession_queue| %>
           <li>
@@ -13,7 +47,7 @@
               <i class="fa-solid fa-pen-to-square"></i>
             <% end %> |
             <%= confession_queue.place %> |
-            <%= confession_queue.date %> |
+            <%= confession_queue.date.strftime('%d/%m/%Y') %> |
             Fila: <%= confession_queue.schedulings.count %> |
             <%= confession_queue.latitude ? Geocoder::Calculations.distance_between(@latlng, [confession_queue.latitude, confession_queue.longitude]).round(1) : "?" %> Km
             <%= link_to "Agendar", new_confession_queue_scheduling_path(confession_queue_id: confession_queue.id) %>

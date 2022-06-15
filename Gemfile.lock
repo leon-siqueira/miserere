@@ -157,6 +157,10 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rake (13.0.6)
+    ransack (3.2.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -186,6 +190,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stimulus-rails (1.0.4)
+      railties (>= 6.0.0)
     thor (1.2.1)
     tilt (2.0.10)
     timeliness (0.4.4)
@@ -235,9 +241,11 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.5)
   rake
+  ransack
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
+  stimulus-rails
   turbolinks (~> 5)
   tzinfo-data
   validates_timeliness (~> 6.0.0.beta2)
