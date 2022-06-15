@@ -3,7 +3,9 @@ class ConfessionQueuesController < ApplicationController
 
   def index
     @latlng = [-5.8415, -35.2104]
-    @confession_queues = ConfessionQueue.all
+    @q = ConfessionQueue.ransack(params[:q])
+    @confession_queues = @q.result.where('date >= ?', Date.today)
+    @confession_queues = @q.result.where('date = ?', Date.parse(params[:q]['date'])) if params[:q] && !params[:q]['date'].empty?
   end
 
   def show
@@ -15,7 +17,7 @@ class ConfessionQueuesController < ApplicationController
 
   def create
     @confession_queue = ConfessionQueue.new(confession_queue_params)
-    sych_times
+    sych_times unless @confession_queue.start_time.nil? || @confession_queue.end_time.nil?
 
     if @confession_queue.save
       redirect_to confession_queues_path

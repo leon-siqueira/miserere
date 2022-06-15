@@ -13,6 +13,8 @@ application.load(definitionsFromContext(context))
 // import Flatpickr
 import Flatpickr from 'stimulus-flatpickr'
 
+// import 'flatpickr/dist/themes/material_blue.css'
+
 // Import style for flatpickr
 require("flatpickr/dist/flatpickr.css")
 

@@ -24,8 +24,11 @@ gem 'jbuilder', '~> 2.7'
 # task runner
 gem 'rake'
 
-# stimulus, JS framework
+# stimulus: JS framework
 gem 'stimulus-rails'
+
+# assits on searches
+gem 'ransack'
 
 gem 'geocoder'
 
