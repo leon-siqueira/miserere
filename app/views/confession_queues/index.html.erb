@@ -37,7 +37,7 @@
       <% end %>
     </div>
     <div class="col-lg-8">
-      <% unless params[:q].values.uniq == ['']  %>
+      <% if params[:q] && params[:q].values.uniq != ['']  %>
        <h4>Resultados para '<%= "#{params[:q].values.reject{ |p| p == ''}.join(" ")}"%>'</h4>
       <% end %>
       <ul>

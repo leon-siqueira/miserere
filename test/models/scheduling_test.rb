@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: schedulings
@@ -16,7 +18,7 @@
 #
 #  fk_rails_...  (confession_queue_id => confession_queues.id)
 #
-require "test_helper"
+require 'test_helper'
 
 class SchedulingTest < ActiveSupport::TestCase
   # test "the truth" do

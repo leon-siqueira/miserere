@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConfessionQueuesController < ApplicationController
   before_action :set_confession_queue, only: %i[show edit update destroy]
 
@@ -5,11 +7,13 @@ class ConfessionQueuesController < ApplicationController
     @latlng = [-5.8415, -35.2104]
     @q = ConfessionQueue.ransack(params[:q])
     @confession_queues = @q.result.where('date >= ?', Date.today)
-    @confession_queues = @q.result.where('date = ?', Date.parse(params[:q]['date'])) if params[:q] && !params[:q]['date'].empty?
+    if params[:q] && !params[:q]['date'].empty?
+      @confession_queues = @q.result.where('date = ?',
+                                           Date.parse(params[:q]['date']))
+    end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @confession_queue = ConfessionQueue.new
@@ -26,8 +30,7 @@ class ConfessionQueuesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     sych_times
@@ -58,6 +61,7 @@ class ConfessionQueuesController < ApplicationController
   end
 
   def confession_queue_params
-    params.require(:confession_queue).permit(:date, :start_time, :end_time, :place, :notes, :street, :city, :state, :postcode)
+    params.require(:confession_queue).permit(:date, :start_time, :end_time, :place, :notes, :street, :city, :state,
+                                             :postcode)
   end
 end
