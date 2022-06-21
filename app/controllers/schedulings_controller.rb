@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchedulingsController < ApplicationController
   before_action :set_scheduling, only: %i[edit update destroy]
   before_action :set_confession_queue, only: %i[new create]

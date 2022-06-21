@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddGeoInfoToConfessionQueues < ActiveRecord::Migration[6.1]
   def change
     add_column :confession_queues, :city, :string, null: false, default: ''

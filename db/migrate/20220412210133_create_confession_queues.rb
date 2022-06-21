@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateConfessionQueues < ActiveRecord::Migration[6.1]
   def change
     create_table :confession_queues do |t|

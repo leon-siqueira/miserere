@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: confession_queues
@@ -38,5 +40,4 @@ class ConfessionQueue < ApplicationRecord
   def address_changed?
     street_changed? || city_changed? || postcode_changed? || state_changed?
   end
-
 end
